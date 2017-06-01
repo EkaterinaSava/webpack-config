@@ -17,5 +17,8 @@ module.exports = {
   // т.к. редактор может не успеть сохранить, а вебпак уже запутсит сборку
   watchOptions: {
     aggregateTimeout: 100
-  }
+  },
+
+  // добавим source maps для нашего кода, чтобы удобно отлаживать
+  devtool: "cheap-inline-source-map"
 }
