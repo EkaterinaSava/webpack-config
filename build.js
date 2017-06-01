@@ -1,3 +1,4 @@
+var home =
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -45,10 +46,14 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
-	// модуль home^ который подключает модуль welcome
+
+	// модуль home, который подключает модуль welcome
 	let welcome = __webpack_require__(1);
 
 	welcome("home");
+
+	// экспортируем welcome "во вне"
+	exports.welcome = welcome;
 
 
 /***/ }),
