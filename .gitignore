@@ -3,3 +3,4 @@
 robots.txt
 Thumbs.db
 .DS_store
+/node_modules
