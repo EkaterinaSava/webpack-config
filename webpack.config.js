@@ -7,14 +7,27 @@ const NODE_ENV = process.env.NODE_ENV || 'development';
 const webpack = require('webpack');
 
 module.exports = {
+  // __чтобы не дублировать постоянно для entry папку /frontend, добавим contex, где укажем, откуда начинать "вход"
+  context: __dirname + '/frontend',
   // __entry - какой модуль собирать
-  entry: "./home",
+  //entry: "./home",
+  // __заменим одну точку входа на несколько, будет собирать 2 разных бандла для home и для about
+  entry: {
+    home:  "./home",
+    about: "./about"
+  },
   // __output - куда будем выводить
   output: {
-    filename: "build.js",
+    // __добавим указание директории (через указание абсолютного пути к директории сборки)
+    path: __dirname + '/public',
+    //filename: "build.js",
+    // __заменим название конкретного файла на шаблон, который будет подставлять название из параметров entry
+    filename: "[name].js",
     // __добавим новую настройку library - в эту переменную home будут помещены все 'exports' после сборки
     // __(см. файл home, там 'exports' welcome)
-    library: "home"
+    //library: "home"
+    // __тоже заменим имя глобальной переменной на шаблон
+    library: "[name]"
   },
 
   // __добавим вотчер, чтобы не перезапускать сборку после каждого изменения
