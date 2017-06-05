@@ -82,3 +82,18 @@ module.exports = {
     }]
   }
 };
+
+// __особые настройки production-версии
+if (NODE_ENV == 'production') {
+  module.exports.plugins.push(
+    // __добавим минификацию с помощью 'Uglify Js'
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        // __варнинги не показывать, консоль-логи убрать, можно использовать небезопасные штуки
+        warnings:     false,
+        drop_console: true,
+        unsafe:       true
+      }
+    })
+  );
+}
