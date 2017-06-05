@@ -61,6 +61,11 @@ module.exports = {
       // __т.е. NODE_ENV мы хотим передавать как есть
       NODE_ENV: JSON.stringify(NODE_ENV),
       LANG:     JSON.stringify('ru')
+    }),
+    // __добавим еще один плагин - для того, чтобы выделить общий для всего проекта код, который будет подключаться на всех страницах
+    new webpack.optimize.CommonsChunkPlugin({
+      // __зададим имя нового кусочка сборки, т.е. файла с общим кодом
+      name: "common"
     })
 
   ],
