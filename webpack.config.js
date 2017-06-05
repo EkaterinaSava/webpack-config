@@ -50,6 +50,22 @@ module.exports = {
 
   ],
 
+  // __эти 2 настройки 'resolve' описывают как вебпак ищет модули
+  // __resolve про модули вообще:
+  resolve: {
+    // __в каких директориях искать, если не указан путь
+    modulesDirectories: ['node_modules'],
+    // __с какими расширениями искать модули
+    extensions: ['', '.js']
+  },
+  // __resolveLoader именно для лоадеров:
+  resolveLoader: {
+    modulesDirectories: ['node_modules'],
+    // __искать вот такой модуль:
+    moduleTemplates: ['*-loader'],
+    extensions: ['', '.js']
+  },
+
   // __добавим лоадеры, т.е. модули
   module: {
   // __loaders - это массив, у элементов которого есть ряд свойств (test, exclude, include, loader, loaders)
