@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function(message) {
+export default function(message) {
 
   // для отладки в dev-режиме
   if (NODE_ENV == 'development') {

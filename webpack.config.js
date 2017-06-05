@@ -48,5 +48,21 @@ module.exports = {
       LANG:     JSON.stringify('ru')
     })
 
-  ]
+  ],
+
+  // __добавим лоадеры, т.е. модули
+  module: {
+  // __loaders - это массив, у элементов которого есть ряд свойств (test, exclude, include, loader, loaders)
+    loaders: [{
+      // test: A condition that must be met
+      // __к файлам, которые заканчиваются на .js
+      test: /\.js$/,
+      // loader: A string of “!” separated loaders
+      // loaders: An array of loaders as string
+      // __надо применить лоадер babel
+      // __через '?' можно дописать различные доп.опции
+      // __runtime позволяет вынести общий вспомогательный функционал бабеля, а не дублировать в каждом модуле
+      loader: 'babel?optional[]=runtime'
+    }]
+  }
 };
