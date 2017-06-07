@@ -40,7 +40,15 @@ module.exports = {
   // __добавим плагины
   plugins: [
     // __добавим плагин, который заменит нам контекст стороннего модуля (moment) на необходимый нам, чтобы не утяжелять сборку
-    new webpack.ContextReplacementPlugin( /node_modules\/moment\/locale/, /ru|en-gb/)
+    //new webpack.ContextReplacementPlugin( /node_modules\/moment\/locale/, /ru|en-gb/)
+
+    // __заменим ContextReplacementPlugin на IgnorePlugin
+    // __например, уберем китайский язык из сборки
+    //new webpack.IgnorePlugin(/zh-/)
+    // __но наша цель была не в этом, а чтобы исключить все, кроме, например двух языков
+    // __с его помощью можно отключить все языки и потом прирекваэрить нужные, но этот плагин ведет себя неочевидным образом
+    // __лучше не использовать (!)
+    new webpack.IgnorePlugin(/\.\/locale/)
   ],
 
   // __эти 2 настройки 'resolve' описывают как вебпак ищет модули
