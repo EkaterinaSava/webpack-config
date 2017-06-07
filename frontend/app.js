@@ -13,14 +13,26 @@ document.getElementById('loginButton').onclick = function() {
     let login = require('./login');
 
     login();
-  });
+  }, 'auth');
 
   // #2: AMD-syntax
   // __тоже получает массив с модулями и вторым аргументом - коллбэк
   // __хоть так и короче запись, но уступает способу #1
-  
   // require(['./login'], function(login) {
   //   login();
   // });
+
+
+  // __добавим еще динамическую подгрузку модуля logout
+  // __массив модулей, передаваемых require.ensure, можно оставить пустым
+  // __он автоматически заполнит его тем, что написано внутри в require()
+  require.ensure([], function(require) {
+    let logout = require('./logout');
+    logout();
+  }, 'auth');
+
+  // __каждый такой require.ensure создает свой бандл, их может быть очень много
+  // __чтобы склеить из в единую сущность, можно воспрльзоваться третим аргументом require.ensure
+  // __если два require.ensure имеют одинаковый третий аргумент, то они будут объелинены в один файл
 
 }

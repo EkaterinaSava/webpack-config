@@ -76,7 +76,7 @@ var app =
 /******/ 			script.charset = 'utf-8';
 /******/ 			script.async = true;
 
-/******/ 			script.src = __webpack_require__.p + "" + chunkId + "." + ({}[chunkId]||chunkId) + ".js";
+/******/ 			script.src = __webpack_require__.p + "" + chunkId + "." + ({"1":"auth"}[chunkId]||chunkId) + ".js";
 /******/ 			head.appendChild(script);
 /******/ 		}
 /******/ 	};
@@ -118,10 +118,22 @@ var app =
 	  // #2: AMD-syntax
 	  // __тоже получает массив с модулями и вторым аргументом - коллбэк
 	  // __хоть так и короче запись, но уступает способу #1
-	  
 	  // require(['./login'], function(login) {
 	  //   login();
 	  // });
+
+
+	  // __добавим еще динамическую подгрузку модуля logout
+	  // __массив модулей, передаваемых require.ensure, можно оставить пустым
+	  // __он автоматически заполнит его тем, что написано внутри в require()
+	  __webpack_require__.e/* nsure */(1, function(require) {
+	    let logout = __webpack_require__(2);
+	    logout();
+	  });
+
+	  // __каждый такой require.ensure создает свой бандл, их может быть очень много
+	  // __чтобы склеить из в единую сущность, можно воспрльзоваться третим аргументом require.ensure
+	  // __если два require.ensure имеют одинаковый третий аргумент, то они будут объелинены в один файл
 
 	}
 
