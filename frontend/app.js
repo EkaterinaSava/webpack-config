@@ -1,27 +1,11 @@
 'use strict';
 
-// __рассмотрим условный require
-let moduleName = location.pathname.slice(1);
+// __допустим мы хотим использовать сторонний модуль moment, который мы установили в /node_modules
+// __в стороннем коде мы не можем руками разрулить проблемы с context
+let moment = require('moment');
 
-// __вернемся к первоначальной задаче: грузить определенный бандл при переходе на определенную страницу (роутинг)
-// __добавим с помощью bundle-loader'а возможность собирать каждый модуль в бандл
-// __наш код становится асинхронным
-// require('bundle!./routes/' + moduleName)(function(route){
-//   route();
-// });
+let today = moment(new Date()).locale('ja');
 
+alert(today.format('DD MMM YYYY'));
 
-// __такой код не дает нам "отлавливать" ошибки, исправим:
-let handler;
-
-try {
-  handler = require('bundle!./routes/' + moduleName);
-} catch (e) {
-  alert("такого модуля нет")
-}
-
-if (handler) {
-  handler(function(route){
-    route();
-  });
-}
+// __при этом наша сборка в public/app.js весит аж 510 Кб(!) и 118 модулей в придачу
