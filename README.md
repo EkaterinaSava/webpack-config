@@ -17,3 +17,4 @@ via screencast by Ilya Kantor
 
 ### require branch:
 Видео 4.1 – 4.7
+* динамиеская подгрузка скриптов через require.ensure
