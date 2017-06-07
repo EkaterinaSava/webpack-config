@@ -1,37 +1,7 @@
 var app =
 /******/ (function(modules) { // webpackBootstrap
-/******/ 	// install a JSONP callback for chunk loading
-/******/ 	var parentJsonpFunction = window["webpackJsonp_name_"];
-/******/ 	window["webpackJsonp_name_"] = function webpackJsonpCallback(chunkIds, moreModules) {
-/******/ 		// add "moreModules" to the modules object,
-/******/ 		// then flag all "chunkIds" as loaded and fire callback
-/******/ 		var moduleId, chunkId, i = 0, callbacks = [];
-/******/ 		for(;i < chunkIds.length; i++) {
-/******/ 			chunkId = chunkIds[i];
-/******/ 			if(installedChunks[chunkId])
-/******/ 				callbacks.push.apply(callbacks, installedChunks[chunkId]);
-/******/ 			installedChunks[chunkId] = 0;
-/******/ 		}
-/******/ 		for(moduleId in moreModules) {
-/******/ 			if(Object.prototype.hasOwnProperty.call(moreModules, moduleId)) {
-/******/ 				modules[moduleId] = moreModules[moduleId];
-/******/ 			}
-/******/ 		}
-/******/ 		if(parentJsonpFunction) parentJsonpFunction(chunkIds, moreModules);
-/******/ 		while(callbacks.length)
-/******/ 			callbacks.shift().call(null, __webpack_require__);
-
-/******/ 	};
-
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
-
-/******/ 	// object to store loaded and loading chunks
-/******/ 	// "0" means "already loaded"
-/******/ 	// Array means "loading", array contains callbacks
-/******/ 	var installedChunks = {
-/******/ 		0:0
-/******/ 	};
 
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
@@ -57,29 +27,6 @@ var app =
 /******/ 		return module.exports;
 /******/ 	}
 
-/******/ 	// This file contains only the entry chunk.
-/******/ 	// The chunk loading function for additional chunks
-/******/ 	__webpack_require__.e = function requireEnsure(chunkId, callback) {
-/******/ 		// "0" is the signal for "already loaded"
-/******/ 		if(installedChunks[chunkId] === 0)
-/******/ 			return callback.call(null, __webpack_require__);
-
-/******/ 		// an array means "currently loading".
-/******/ 		if(installedChunks[chunkId] !== undefined) {
-/******/ 			installedChunks[chunkId].push(callback);
-/******/ 		} else {
-/******/ 			// start chunk loading
-/******/ 			installedChunks[chunkId] = [callback];
-/******/ 			var head = document.getElementsByTagName('head')[0];
-/******/ 			var script = document.createElement('script');
-/******/ 			script.type = 'text/javascript';
-/******/ 			script.charset = 'utf-8';
-/******/ 			script.async = true;
-
-/******/ 			script.src = __webpack_require__.p + "" + chunkId + "." + ({"1":"auth"}[chunkId]||chunkId) + ".js";
-/******/ 			head.appendChild(script);
-/******/ 		}
-/******/ 	};
 
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = modules;
@@ -100,41 +47,58 @@ var app =
 
 	'use strict';
 
-	document.getElementById('loginButton').onclick = function() {
+	// __рассмотрим условный require
+	let moduleName = location.pathname.slice(1);
 
-	  // __2 способа динамической подгрузки скриптов "по мере необходимости"
-	  // __здесь - при клике на кнопку должен подгрузиться скрипт login
-
-	  // #1: require.ensure (функция webpack'а)
-	  // __получает массив ['...', '...'] с одним или несколькими модулями
-	  // __из которых webpack сгенерирует отдельный модуль/бандл
-	  // __который будет вызван через коллбэк function(require) и динамически подгружен
-	  __webpack_require__.e/* nsure */(1, function(require) {
-	    let login = __webpack_require__(1);
-
-	    login();
-	  });
-
-	  // #2: AMD-syntax
-	  // __тоже получает массив с модулями и вторым аргументом - коллбэк
-	  // __хоть так и короче запись, но уступает способу #1
-	  // require(['./login'], function(login) {
-	  //   login();
-	  // });
+	// __ранее выражение внутри require было известно на этапе сборке, но так бывает не всегда
+	// __часто мы хотим, чтобы приложение получало URL и на основе него решало, какой модуль подгрузить
+	let route = __webpack_require__(1)("./" + moduleName);
+	route();
 
 
-	  // __добавим еще динамическую подгрузку модуля logout
-	  // __массив модулей, передаваемых require.ensure, можно оставить пустым
-	  // __он автоматически заполнит его тем, что написано внутри в require()
-	  __webpack_require__.e/* nsure */(1, function(require) {
-	    let logout = __webpack_require__(2);
-	    logout();
-	  });
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
 
-	  // __каждый такой require.ensure создает свой бандл, их может быть очень много
-	  // __чтобы склеить из в единую сущность, можно воспрльзоваться третим аргументом require.ensure
-	  // __если два require.ensure имеют одинаковый третий аргумент, то они будут объелинены в один файл
+	var map = {
+		"./about": 2,
+		"./about.js": 2,
+		"./home": 3,
+		"./home.js": 3
+	};
+	function webpackContext(req) {
+		return __webpack_require__(webpackContextResolve(req));
+	};
+	function webpackContextResolve(req) {
+		return map[req] || (function() { throw new Error("Cannot find module '" + req + "'.") }());
+	};
+	webpackContext.keys = function webpackContextKeys() {
+		return Object.keys(map);
+	};
+	webpackContext.resolve = webpackContextResolve;
+	module.exports = webpackContext;
+	webpackContext.id = 1;
 
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports) {
+
+	'use strict';
+
+	module.exports = function() {
+	  alert('about module');
+	}
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports) {
+
+	'use strict';
+
+	module.exports = function() {
+	  alert('home module');
 	}
 
 
