@@ -35,4 +35,4 @@ via screencast by Ilya Kantor
 Видео 5.1 – 5.5
 * подключение скриптов с CDN и использование `externals` в конфиге
 * «ProvidePlugin»
-* оптимизация - `exclude`, `include`, `noParse`
+* оптимизация - `exclude`, `noParse` & `include`
