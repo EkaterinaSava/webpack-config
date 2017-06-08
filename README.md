@@ -37,3 +37,4 @@ via screencast by Ilya Kantor
 * «ProvidePlugin»
 * оптимизация - `exclude`, `noParse` & `include`
 * работа со старыми/чужими скриптами – `exports-loader` & `imports-loader`
+* `expose-loader` 
