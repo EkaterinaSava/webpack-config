@@ -14,7 +14,14 @@ module.exports = {
   },
 
   // __объект, где ключами служат названия модулей, а значениями - глобальные переменные
-  externals: {
-    lodash: '_'
-  }
+  // externals: {
+  //   lodash: '_'
+  // }
+
+  plugins: [
+    new webpack.ProvidePlugin({
+      pluck: 'lodash/fp/pluck',
+      _: 'lodash'
+    })
+  ]
 };
