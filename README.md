@@ -36,3 +36,4 @@ via screencast by Ilya Kantor
 * подключение скриптов с CDN и использование `externals` в конфиге
 * «ProvidePlugin»
 * оптимизация - `exclude`, `noParse` & `include`
+* работа со старыми/чужими скриптами – `exports-loader` & `imports-loader`
