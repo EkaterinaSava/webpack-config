@@ -1,19 +1,26 @@
 'use strict';
 
-let ExtractTextPlugin = require('extract-text-webpack-plugin');
+const NODE_ENV = process.env.NODE_ENV || 'development';
+const webpack = require('webpack');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const AssetsPlugin = require('assets-webpack-plugin');
+const rimraf = require('rimraf');
 
 module.exports = {
   context: __dirname + '/frontend',
 
   entry: {
-    main: './main',
-    styles: './styles'
+    home: './home',
+    about: './about',
+    common: './common'
   },
 
   output: {
-    path: __dirname + '/public',
-    publicPath: '/',
-    filename: '[name].js'
+    path: __dirname + '/public/assets',
+    publicPath: '/assets/',
+    filename: '[name].js',
+    chunkFilename: '[id].js',
+    library: '[name]'
   },
 
   resolve: {
@@ -33,11 +40,6 @@ module.exports = {
       },
       {
         test: /\.styl$/,
-        // __при наличии цепочки лоадеров, они обрабатываются слева направо с вызовом pitch-функций
-        // __если этих функцийнет или они ничего не возвращает, то управление доходит до конца, разворачивается справа налево
-        // __и при проходе справа налево вызывается уже основная функция лоадера
-        //loader: 'style!css!autoprefixer?browsers=last 2 version!stylus'
-        // __посмотрим на работу ExtractTextPlugin
         loader: ExtractTextPlugin.extract('css!stylus?resolve url')
       },
       {
@@ -48,7 +50,24 @@ module.exports = {
   },
 
   plugins: [
-    new ExtractTextPlugin('[name].css', {allChunks: true})
+
+    {
+      apply: (compiler) => {
+        rimraf.sync(compiler.options.output.path);
+      }
+    },
+
+    new ExtractTextPlugin('[name].css', {allChunks: true}),
+
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'common'
+    }),
+
+    new AssetsPlugin({
+      filename: 'assets.json',
+      path:     __dirname + '/public/assets'
+    })
+    
   ]
 
 };

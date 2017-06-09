@@ -1,4 +1,4 @@
-webpackJsonp([1],[
+webpackJsonp_name_([1],[
 /* 0 */,
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -16,6 +16,8 @@ webpackJsonp([1],[
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	__webpack_require__(5);
 
 	var Menu = function Menu(options) {
 	  var _this = this;
@@ -327,6 +329,12 @@ webpackJsonp([1],[
 /***/ (function(module, exports) {
 
 	/* (ignored) */
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
 
 /***/ })
 ]);
