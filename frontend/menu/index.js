@@ -1,8 +1,6 @@
 'use strict';
 
-import './menu.css';
-
-import template from './menu.pug';
+import template from './menu.jade';
 
 export default class Menu {
   constructor(options) {
@@ -11,7 +9,7 @@ export default class Menu {
 
     this.elem.innerHTML = template(options);
 
-    thid.titleElem = this.elem.querySelector('.title');
+    this.titleElem = this.elem.querySelector('.title');
 
     this.titleElem.onclick = () => this.elem.classList.toggle('open');
 

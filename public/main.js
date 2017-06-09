@@ -87,7 +87,7 @@
 /******/ 	__webpack_require__.c = installedModules;
 
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
+/******/ 	__webpack_require__.p = "/";
 
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(0);
@@ -99,12 +99,11 @@
 
 	'use strict';
 
-	let Menu = __webpack_require__.e/* nsure */(1, function (require) {
+	__webpack_require__.e/* nsure */(1, function (require) {
+	  var Menu = __webpack_require__(1);
 
-	  let Menu = __webpack_require__(1);
-
-	  let pandamanu = new Menu({
-	    title: 'Меню Панды',
+	  var pandaMenu = new Menu({
+	    title: "Меню панды",
 	    items: [{
 	      text: 'Яйца',
 	      href: '#eggs'
@@ -112,12 +111,12 @@
 	      text: 'Мясо',
 	      href: '#meat'
 	    }, {
-	      text: '99% еды – бамбук!',
+	      text: '99% еды - бамбук!',
 	      href: '#bamboo'
 	    }]
 	  });
 
-	  document.body.appendChild(pandamenu.elem);
+	  document.body.appendChild(pandaMenu.elem);
 	});
 
 /***/ })
