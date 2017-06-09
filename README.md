@@ -1,5 +1,5 @@
 # webpack-config
-via screencast by Ilya Kantor
+via [screencast](https://learn.javascript.ru/screencast/webpack) by Ilya Kantor
 
 ## Простая сборка
 ### master branch:
@@ -37,4 +37,14 @@ via screencast by Ilya Kantor
 * «ProvidePlugin»
 * оптимизация - `exclude`, `noParse` & `include`
 * работа со старыми/чужими скриптами – `exports-loader` & `imports-loader`
-* `expose-loader` 
+* `expose-loader`
+
+## Стили и файлы
+### styles branch:
+Видео 6.1 – 6.6
+* `style-loader` на примере компонента `Menu`
+* CSS и `file-loader`
+* `url-loader`
+* `jade-loader`
+* работа с препроцессорами
+* «ExtractTextPlugin»

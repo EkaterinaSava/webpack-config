@@ -1,30 +1,40 @@
-// __например, мы хоти использовать фреймворк angular
 'use strict';
+
+let webpack = require('webpack');
 
 module.exports = {
   context: __dirname + '/frontend',
-  entry: './home',
+
+  entry: './main',
 
   output: {
     path: __dirname + '/public',
-    filename: 'home.js'
+    filename: '[name].js'
   },
 
-  // __вместо того, чтобы использовать imports/exports в вызове require (как в home.js) мы можем их вынести
-  // __в отдельную секцию конфига, чтобы не перечислять их каждый раз при вызове old
   module: {
-    loaders: [{
-      test: /old.js$/,
-      loader: 'expose?Work!imports?workSettings=>{delay:500}!exports?Work'
-    }]
-  },
 
-  resolve: {
-    // __root - это дополнительный каталог, типа node_modules, в котором будут искаться модули
-    root: __dirname + '/vendor',
-    // __создадим короткий алиас, чтобы не писать в модуле - require('old/dist/old'), а коротко - require('old')
-    alias: {
-      old: 'old/dist/old'
-    }
+    loaders: [
+      {
+        test: /\.js$/,
+        loader: 'babel'
+      },
+      {
+        test: /\.pug$/,
+        loader: 'pug'
+      },
+      {
+        test: /\.css$/,
+        // __при наличии цепочки лоадеров, они обрабатываются слева направо с вызовом pitch-функций
+        // __если этих функцийнет или они ничего не возвращает, то управление доходит до конца, разворачивается справа налево
+        // __и при проходе справа налево вызывается уже основная функция лоадера
+        loader: 'ctyle!css!autoprefixer?browsers=last 2 version'
+      },
+      {
+        test: /\.(png|jpg|svg|ttf|eot|woff|woff2)$/,
+        loader: 'file?name=[path][name].[ext]'
+      }
+    ]
   }
+
 };
