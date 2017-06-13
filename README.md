@@ -64,3 +64,11 @@ via [screencast](https://learn.javascript.ru/screencast/webpack) by Ilya Kantor
 ### cache-production branch:
 Видео 7.2
 * файлы с хэшами только для production-версии
+
+### Live Reload & HMR
+## live-reload branch
+Видео 8.1 – 8.4
+* webpack dev server
+* продвинутая настройка WDS
+* live reload
+* hot module replacement
