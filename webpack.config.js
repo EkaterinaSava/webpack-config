@@ -42,8 +42,20 @@ module.exports = {
   // __добавим dev server и его настройки
   devServer: {
     host: 'localhost', //default
-    port: 8080, //default
-    contentBase: __dirname + '/backend'
+    port: 8080 //default
+    //contentBase: __dirname + '/backend'
+
+    // __добавим proxy: мы хотим, чтобы все пути не найденные у нас, отправлялись на localhost:4000
+    // __т.к. там у нас имитация бэкэнда (файл backend/server.js)
+    // __можно записать как объект, тогда путем должна быть строка
+    // proxy: {
+    //   '*': 'http://localhost:4000'
+    // }
+    // __а можно как массив, тогда мы можем использовать а) регулярки б) несколько путей
+    // proxy: [{
+    //   path: /.*/,
+    //   target: 'http://localhost:4000'
+    // }]
   }
 
 };
