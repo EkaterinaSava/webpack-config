@@ -1,40 +1,19 @@
 'use strict';
 
-const NODE_ENV = process.env.NODE_ENV || 'development';
-const webpack = require('webpack');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const rimraf = require('rimraf');
-
-
-// __для production-версии обернем каждое имя файлв вот в такую обертку,
-// __которая берет шаблон и заменяет название файла с {имя.расширение} на {имя.хэш.расширение}
-// __c помощью регулярного выражения
-function addHash(template, hash) {
-  return NODE_ENV == 'production' ? template.replace(/\.[^.]+$/, `.[${hash}]$&`) : template;
-}
+let webpack = require('webpack');
+let ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
   context: __dirname + '/frontend',
 
   entry: {
-    home: './home',
-    about: './about',
-    common: './common'
+    main: './main'
   },
 
   output: {
-    path: __dirname + '/public/assets',
-    publicPath: '/assets/',
-    // __вызов функции addHash
-    filename: addHash('[name].js', 'chunkhash'),
-    // __вызов функции addHash
-    chunkFilename: addHash('[id].js', 'chunkhash'),
-    library: '[name]'
-  },
-
-  resolve: {
-    extensions: ['', '.js', '.styl']
+    path: __dirname + '/public',
+    publicPath: '/',
+    filename: '[name].js'
   },
 
   module: {
@@ -42,6 +21,7 @@ module.exports = {
     loaders: [
       {
         test: /\.js$/,
+        include: __dirname + '/frontend',
         loader: 'babel?presets[]=es2015'
       },
       {
@@ -50,42 +30,20 @@ module.exports = {
       },
       {
         test: /\.styl$/,
-        loader: ExtractTextPlugin.extract('css!stylus?resolve url')
+        loader: 'style!css!stylus?resolve url'
       },
       {
         test: /\.(png|jpg|svg|ttf|eot|woff|woff2)$/,
-        // __вызов функции addHash
-        loader: addHash('file?name=[path][name].[ext]', 'hash:6')
+        loader: 'file?name=[path][name].[ext]?[hash]'
       }
     ]
   },
 
-  plugins: [
-
-    {
-      apply: (compiler) => {
-        rimraf.sync(compiler.options.output.path);
-      }
-    },
-
-    // __вызов функции addHash
-    new ExtractTextPlugin(addHash('[name].css', 'contenthash'), {allChunks: true}),
-
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'common'
-    }),
-
-    new HtmlWebpackPlugin({
-      // __для страницы about
-      filename: './about.html',
-      chunks: ['common', 'about']
-    }),
-    new HtmlWebpackPlugin({
-      // __для страницы home
-      filename: './home.html',
-      chunks: ['common', 'home']
-    })
-
-  ]
+  // __добавим dev server и его настройки
+  devServer: {
+    host: 'localhost', //default
+    port: 8080, //default
+    contentBase: __dirname + '/backend'
+  }
 
 };
