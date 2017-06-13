@@ -48,3 +48,19 @@ via [screencast](https://learn.javascript.ru/screencast/webpack) by Ilya Kantor
 * `jade-loader`
 * работа с препроцессорами
 * «ExtractTextPlugin»
+
+## Кеширование
+### cache branch:
+Видео 7.1
+* `assets-webpack-plugin`
+* генерация файлов статики (css, js) с хэшами
+* версионирование файлов через запись актуальных версий в assets.json
+
+### cache-2 branch:
+Видео 7.2
+* `html-webpack-plugin`
+* генерация html-файлов с "правильными" URL-ами (с хэшами)
+
+### cache-production branch:
+Видео 7.2
+* файлы с хэшами только для production-версии
