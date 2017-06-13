@@ -6,6 +6,14 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const rimraf = require('rimraf');
 
+
+// __для production-версии обернем каждое имя файлв вот в такую обертку,
+// __которая берет шаблон и заменяет название файла с {имя.расширение} на {имя.хэш.расширение}
+// __c помощью регулярного выражения
+function addHash(template, hash) {
+  return NODE_ENV == 'production' ? template.replace(/\.[^.]+$/, `.[${hash}]$&`) : template;
+}
+
 module.exports = {
   context: __dirname + '/frontend',
 
@@ -18,8 +26,10 @@ module.exports = {
   output: {
     path: __dirname + '/public/assets',
     publicPath: '/assets/',
-    filename: '[name].[chunkhash].js',
-    chunkFilename: '[id].[chunkhash].js',
+    // __вызов функции addHash
+    filename: addHash('[name].js', 'chunkhash'),
+    // __вызов функции addHash
+    chunkFilename: addHash('[id].js', 'chunkhash'),
     library: '[name]'
   },
 
@@ -44,7 +54,8 @@ module.exports = {
       },
       {
         test: /\.(png|jpg|svg|ttf|eot|woff|woff2)$/,
-        loader: 'file?name=[path][name].[hash:6][ext]'
+        // __вызов функции addHash
+        loader: addHash('file?name=[path][name].[ext]', 'hash:6')
       }
     ]
   },
@@ -57,7 +68,8 @@ module.exports = {
       }
     },
 
-    new ExtractTextPlugin('[name].[contenthash].css', {allChunks: true}),
+    // __вызов функции addHash
+    new ExtractTextPlugin(addHash('[name].css', 'contenthash'), {allChunks: true}),
 
     new webpack.optimize.CommonsChunkPlugin({
       name: 'common'
