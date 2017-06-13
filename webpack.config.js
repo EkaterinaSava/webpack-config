@@ -3,7 +3,7 @@
 const NODE_ENV = process.env.NODE_ENV || 'development';
 const webpack = require('webpack');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const AssetsPlugin = require('assets-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const rimraf = require('rimraf');
 
 module.exports = {
@@ -63,9 +63,15 @@ module.exports = {
       name: 'common'
     }),
 
-    new AssetsPlugin({
-      filename: 'assets.json',
-      path:     __dirname + '/public/assets'
+    new HtmlWebpackPlugin({
+      // __для страницы about
+      filename: './about.html',
+      chunks: ['common', 'about']
+    }),
+    new HtmlWebpackPlugin({
+      // __для страницы home
+      filename: './home.html',
+      chunks: ['common', 'home']
     })
 
   ]
