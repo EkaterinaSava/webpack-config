@@ -69,5 +69,5 @@ via [screencast](https://learn.javascript.ru/screencast/webpack) by Ilya Kantor
 ## live-reload branch
 Видео 8.1 – 8.4
 * установка и настройка `webpack-dev-server`, параметр `contentBase`
-* live reload
+* live reload, hot module replacement и работа с CSS через `ExtractTextPlugin` 
 * hot module replacement

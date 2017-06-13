@@ -1,7 +1,6 @@
-webpackJsonp([1],[
-/* 0 */,
-/* 1 */,
-/* 2 */
+webpackJsonp([1],{
+
+/***/ 76:
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -10,7 +9,7 @@ webpackJsonp([1],[
 	  value: true
 	});
 
-	var _menu = __webpack_require__(3);
+	var _menu = __webpack_require__(77);
 
 	var _menu2 = _interopRequireDefault(_menu);
 
@@ -18,7 +17,7 @@ webpackJsonp([1],[
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	__webpack_require__(6);
+	__webpack_require__(80);
 
 	var Menu = function Menu(options) {
 	  var _this = this;
@@ -44,10 +43,11 @@ webpackJsonp([1],[
 	exports.default = Menu;
 
 /***/ }),
-/* 3 */
+
+/***/ 77:
 /***/ (function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(4);
+	var jade = __webpack_require__(78);
 
 	module.exports = function template(locals) {
 	var buf = [];
@@ -81,7 +81,8 @@ webpackJsonp([1],[
 	}
 
 /***/ }),
-/* 4 */
+
+/***/ 78:
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -301,7 +302,7 @@ webpackJsonp([1],[
 	    throw err;
 	  }
 	  try {
-	    str = str || __webpack_require__(5).readFileSync(filename, 'utf8')
+	    str = str || __webpack_require__(79).readFileSync(filename, 'utf8')
 	  } catch (ex) {
 	    rethrow(err, null, lineno)
 	  }
@@ -333,29 +334,31 @@ webpackJsonp([1],[
 
 
 /***/ }),
-/* 5 */
+
+/***/ 79:
 /***/ (function(module, exports) {
 
 	/* (ignored) */
 
 /***/ }),
-/* 6 */
+
+/***/ 80:
 /***/ (function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(7);
+	var content = __webpack_require__(81);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(11)(content, {});
+	var update = __webpack_require__(85)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
-	if(false) {
+	if(true) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/stylus-loader/index.js?resolve url!./menu.styl", function() {
-				var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/stylus-loader/index.js?resolve url!./menu.styl");
+			module.hot.accept(81, function() {
+				var newContent = __webpack_require__(81);
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -365,21 +368,23 @@ webpackJsonp([1],[
 	}
 
 /***/ }),
-/* 7 */
+
+/***/ 81:
 /***/ (function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(8)();
+	exports = module.exports = __webpack_require__(82)();
 	// imports
 
 
 	// module
-	exports.push([module.id, ".menu .title {\n  background-image: url(" + __webpack_require__(9) + ");\n  padding: 0 6px 0 16px;\n  background-position: left 1px;\n  background-repeat: no-repeat;\n  background-size: 14px;\n  font-weight: bold;\n  cursor: pointer;\n}\n.menu .list {\n  display: none;\n  margin: 0;\n}\n.menu .list a {\n  color: #00f;\n}\n.menu.open .list {\n  display: block;\n}\n.menu.open .title {\n  background-image: url(" + __webpack_require__(10) + ");\n}\n", ""]);
+	exports.push([module.id, ".menu .title {\n  background-image: url(" + __webpack_require__(83) + ");\n  padding: 0 6px 0 16px;\n  background-position: left 1px;\n  background-repeat: no-repeat;\n  background-size: 14px;\n  font-weight: bold;\n  cursor: pointer;\n}\n.menu .list {\n  display: none;\n  margin: 0;\n}\n.menu .list a {\n  color: #00f;\n}\n.menu.open .list {\n  display: block;\n}\n.menu.open .title {\n  background-image: url(" + __webpack_require__(84) + ");\n}\n", ""]);
 
 	// exports
 
 
 /***/ }),
-/* 8 */
+
+/***/ 82:
 /***/ (function(module, exports) {
 
 	/*
@@ -435,19 +440,22 @@ webpackJsonp([1],[
 
 
 /***/ }),
-/* 9 */
+
+/***/ 83:
 /***/ (function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "menu/plus.svg?44b8980a2cbcd71ea3cbca053c435928";
 
 /***/ }),
-/* 10 */
+
+/***/ 84:
 /***/ (function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "menu/minus.svg?a45ef4bc733666320445624f1f7d15f9";
 
 /***/ }),
-/* 11 */
+
+/***/ 85:
 /***/ (function(module, exports, __webpack_require__) {
 
 	/*
@@ -699,4 +707,5 @@ webpackJsonp([1],[
 
 
 /***/ })
-]);
+
+});

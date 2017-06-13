@@ -7,7 +7,15 @@ module.exports = {
   context: __dirname + '/frontend',
 
   entry: {
-    main: './main'
+    // __это будет наш JS, который связывается с webpack-dev-server (клиентская часть)
+    // __получает изменения и обновляет страницу
+    // __точка входа (./main) должна быть посдледней, т.к. если будет параметр libraries в output,
+    // __то он возьмет только то, что здесь записано последним
+    //main: ['webpack-dev-server/client', 'webpack/hot/dev-server', './main']
+
+    // __чтобы не писать эту магию здесь, можно запускать дев-сервер с 2 доп.командами
+    // webpack-dev-server --inline --hot (омг! оно наконец-то стало работать нормально!)
+    main: './main.js'
   },
 
   output: {
@@ -34,15 +42,21 @@ module.exports = {
       },
       {
         test: /\.(png|jpg|svg|ttf|eot|woff|woff2)$/,
+        // __для адекватной работы HMR обязательно должен быть хэш
+        // __иначе он не смжет понять, что файл изменился
         loader: 'file?name=[path][name].[ext]?[hash]'
       }
     ]
   },
 
+  // plugins: [
+  //   new webpack.HotModuleReplacementPlugin()
+  // ],
+
   // __добавим dev server и его настройки
   devServer: {
     host: 'localhost', //default
-    port: 8080 //default
+    port: 8080, //default
     //contentBase: __dirname + '/backend'
 
     // __добавим proxy: мы хотим, чтобы все пути не найденные у нас, отправлялись на localhost:4000
@@ -56,6 +70,9 @@ module.exports = {
     //   path: /.*/,
     //   target: 'http://localhost:4000'
     // }]
+
+    // __включит hot reaload (по умолчанию - false) плюс нам нужен будет плагин (см.выше)
+    hot: true
   }
 
 };
