@@ -62,7 +62,7 @@ webpackJsonp_name_([1],[
 	    for (var $index = 0, $$l = $$obj.length; $index < $$l; $index++) {
 	      var item = $$obj[$index];
 
-	buf.push("<li><a" + (jade.attr("hraf", item.href, true, false)) + ">" + (jade.escape(null == (jade_interp = item.text) ? "" : jade_interp)) + "</a></li>");
+	buf.push("<li><a" + (jade.attr("href", item.href, true, false)) + ">" + (jade.escape(null == (jade_interp = item.text) ? "" : jade_interp)) + "</a></li>");
 	    }
 
 	  } else {
@@ -70,7 +70,7 @@ webpackJsonp_name_([1],[
 	    for (var $index in $$obj) {
 	      $$l++;      var item = $$obj[$index];
 
-	buf.push("<li><a" + (jade.attr("hraf", item.href, true, false)) + ">" + (jade.escape(null == (jade_interp = item.text) ? "" : jade_interp)) + "</a></li>");
+	buf.push("<li><a" + (jade.attr("href", item.href, true, false)) + ">" + (jade.escape(null == (jade_interp = item.text) ? "" : jade_interp)) + "</a></li>");
 	    }
 
 	  }

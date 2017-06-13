@@ -18,8 +18,8 @@ module.exports = {
   output: {
     path: __dirname + '/public/assets',
     publicPath: '/assets/',
-    filename: '[name].js',
-    chunkFilename: '[id].js',
+    filename: '[name].[chunkhash].js',
+    chunkFilename: '[id].[chunkhash].js',
     library: '[name]'
   },
 
@@ -44,7 +44,7 @@ module.exports = {
       },
       {
         test: /\.(png|jpg|svg|ttf|eot|woff|woff2)$/,
-        loader: 'file?name=[path][name].[ext]'
+        loader: 'file?name=[path][name].[hash:6][ext]'
       }
     ]
   },
@@ -57,7 +57,7 @@ module.exports = {
       }
     },
 
-    new ExtractTextPlugin('[name].css', {allChunks: true}),
+    new ExtractTextPlugin('[name].[contenthash].css', {allChunks: true}),
 
     new webpack.optimize.CommonsChunkPlugin({
       name: 'common'
@@ -67,7 +67,7 @@ module.exports = {
       filename: 'assets.json',
       path:     __dirname + '/public/assets'
     })
-    
+
   ]
 
 };
